@@ -41,7 +41,7 @@ struct LocationDetailView: View {
                     .font(.headline)
                     .fontWeight(.bold)
                     .padding(16)
-                    .foregroundStyle(.black)
+                    .foregroundStyle(Color(UIColor.label))
                     .background(.thinMaterial)
                     .cornerRadius(10)
                     .shadow(radius: 4)
@@ -59,11 +59,11 @@ extension LocationDetailView{
                 Image(image)
                     .resizable()
                     .scaledToFill()
-                    .frame(width: UIScreen.main.bounds.width)
+                    .frame(width: UIDevice.current.userInterfaceIdiom == .pad ? nil : UIScreen.main.bounds.width)
                     .clipped()
             }
         }
-        .frame(width: .infinity)
+        .frame(maxWidth: .infinity)
         .frame(height: 500)
        // .cornerRadius(20)
        // .padding()

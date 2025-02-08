@@ -10,9 +10,8 @@ import MapKit
 
 
 struct LocationView: View {
- 
- 
     @EnvironmentObject private var vm : LocationViewModel
+    let maxWidthForiPad :CGFloat = 700
     
     var body: some View {
         ZStack{
@@ -22,8 +21,10 @@ struct LocationView: View {
             VStack(spacing: 0) {
                 Header
                     .padding()
+                    .frame(maxWidth: maxWidthForiPad)
                 Spacer()
                 locationsPreviewStack
+                   
             }
         }.sheet(item: $vm.sheetLocation, onDismiss: nil) { location  in
             LocationDetailView(location: location)
@@ -40,14 +41,14 @@ extension LocationView{
                 Text(vm.mapLocation.name + ", " + vm.mapLocation.cityName)
                     .font(.title2)
                     .fontWeight(.black)
-                    .foregroundStyle(.black)
+                    .foregroundStyle(Color(UIColor.label))
                     .frame(height : 55)
                     .frame(maxWidth: .infinity)
                     .animation(.none,value: vm.mapLocation)
                     .overlay(alignment: .leading) {
                         Image(systemName: "arrow.down")
                             .font(.headline)
-                            .foregroundStyle(.black)
+                            .foregroundStyle(Color(UIColor.label))
                             .padding()
                             .rotationEffect(.degrees(vm.showLocationList ? 180 : 0))
                     }
@@ -82,6 +83,8 @@ extension LocationView{
                     LocationPreviewView(location: location)
                         .shadow(color: .black.opacity(0.3), radius:20)
                         .padding()
+                        .frame(maxWidth: maxWidthForiPad)
+                        .frame(maxWidth: .infinity)
                         .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
                        
                 }
