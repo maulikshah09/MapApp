@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct LocationPreviewView: View {
-    @State var isShowalert = false
     @EnvironmentObject private var vm: LocationViewModel
     let location : Location
     
@@ -66,16 +65,14 @@ extension LocationPreviewView{
     
     private var learnMoreButton : some View{
         Button{
-            isShowalert.toggle()
+            vm.sheetLocation = location
         }label: {
             Text("Learn more")
                 .font(.headline)
                 .frame(width: 125,height: 35)
         }
         .buttonStyle(.borderedProminent)
-        .alert(isPresented: $isShowalert) {
-            Alert(title: Text(""))
-        }
+
     }
     
     private var nextButton: some View{

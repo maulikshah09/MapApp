@@ -11,6 +11,7 @@ import MapKit
 
 struct LocationView: View {
  
+ 
     @EnvironmentObject private var vm : LocationViewModel
     
     var body: some View {
@@ -24,6 +25,8 @@ struct LocationView: View {
                 Spacer()
                 locationsPreviewStack
             }
+        }.sheet(item: $vm.sheetLocation, onDismiss: nil) { location  in
+            LocationDetailView(location: location)
         }
     }
 }
@@ -31,7 +34,6 @@ struct LocationView: View {
 extension LocationView{
     private var Header: some View{
         VStack{
-           
             Button {
                 vm.toggleLocationList()
             } label: {
